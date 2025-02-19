@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 # Replace with your actual bot token
 TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
-LOGO_URL = "https://drive.google.com/file/d/1_8A6AQEXtsLdbMN8m7F_W198ThhfMU81/view?usp=drive_link"  # Replace with your actual logo URL
+LOGO_URL = "https://drive.google.com/file/d/1_8A6AQEXtsLdbMN8m7F_W198ThhfMU81/view?usp=sharing"  # Replace with your actual logo URL
 
 # Function to handle the /start command
 async def start(update: Update, context):
