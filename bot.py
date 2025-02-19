@@ -51,7 +51,7 @@ TELEGRAM_BOT_TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"  # Replace
 def ask_deepseek(user_message):
     url = "https://api.deepseek.com/v1/chat/completions"  # Example URL, replace if needed
     headers = {
-        "Authorization": f"Bearer {sk-96531fad1ab04ae59c1b5d76cb6aaf07}",
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
         "Content-Type": "application/json"
     }
     data = {
