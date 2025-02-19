@@ -1,82 +1,49 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, CallbackContext
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters
+import logging
 
+# Enable logging
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Replace with your actual bot token
 TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
+LOGO_URL = "https://drive.google.com/file/d/1_8A6AQEXtsLdbMN8m7F_W198ThhfMU81/view?usp=drive_link"  # Replace with your actual logo URL
 
-async def start(update: Update, context: CallbackContext) -> None:
+# Function to handle the /start command
+async def start(update: Update, context):
+    """Sends a welcome message with buttons and a logo image."""
+    chat_id = update.message.chat_id
+
+    # Define the buttons
     keyboard = [
-        [InlineKeyboardButton("🌐 Visit Website", url="https://yourwebsite.com")],
-        [InlineKeyboardButton("📞 Contact Us", url="https://yourwebsite.com/contact")]
+        [InlineKeyboardButton("AI Trade", url="https://your-website.com/ai-trade")],
+        [InlineKeyboardButton("AI Signal", url="https://your-website.com/ai-signal")],
+        [InlineKeyboardButton("Deepseek", url="https://your-website.com/deepseek")],
+        [InlineKeyboardButton("ChatGPT", url="https://your-website.com/chatgpt")],
     ]
-
-
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text(
-        "👋 Lets get try VPASS PRO V2 \n\nChoose an option below:",
-        reply_markup=reply_markup
+    # Send the logo and message
+    await context.bot.send_photo(
+        chat_id=chat_id,
+        photo=LOGO_URL,
+        caption="🚀 Welcome to our AI-powered bot! Choose an option below:",
+        reply_markup=reply_markup,
     )
 
-
-
-
-async def button_click(update: Update, context: CallbackContext) -> None:
-    query = update.callback_query
-    await query.answer()
-
-    if query.data == "deepseek_search":
-        await query.message.reply_text("🔍 Deepseek Search feature coming soon!")
-    elif query.data == "tradingview_signals":
-        await query.message.reply_text("📈 TradingView Signals integration coming soon!")
-
+# Main function to run the bot
 def main():
+    """Start the bot."""
     app = Application.builder().token(TOKEN).build()
 
+    # Add command handlers
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button_click))
 
-    print("🤖 Bot is running...")
+    # Start the bot
     app.run_polling()
 
 if __name__ == "__main__":
     main()
-
-
-
-def ask_deepseek(user_message):
-    url = "https://api.deepseek.com/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "model": "deepseek-chat",
-        "messages": [{"role": "user", "content": user_message}],
-        "temperature": 0.7  # Add temperature to control randomness
-    }
-
-    response = requests.post(url, json=data, headers=headers)
-
-    print("Deepseek API Response:", response.text)  # Debugging line
-
-    if response.status_code == 200:
-        return response.json()["choices"][0]["message"]["content"]
-    else:
-        return f"Error: {response.status_code}, {response.text}"  # Show error message
-
-
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-
-def start(update: Update, context: CallbackContext):
-    keyboard = [
-        [InlineKeyboardButton("📊 Trading Signals", callback_data='signals')],
-        [InlineKeyboardButton("📖 Learn More", callback_data='learn')]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    update.message.reply_text("Welcome! Choose an option:", reply_markup=reply_markup)
-
-dispatcher.add_handler(CommandHandler("start", start))
-
-
-
