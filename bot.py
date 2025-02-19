@@ -6,8 +6,8 @@ TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
 async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [InlineKeyboardButton("🔍 Deepseek Search", callback_data="deepseek_search")],
-        [InlineKeyboardButton("📈 TradingView Signals", callback_data="tradingview_signals")],
-        [InlineKeyboardButton("Go to My Shop", url="https://myshop.com")]]
+        InlineKeyboardButton("📈 TradingView Signals", callback_data="tradingview_signals")],
+        [InlineKeyboardButton("Go to My Shop", url="https://myshop.com")]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
