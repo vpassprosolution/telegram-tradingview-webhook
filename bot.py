@@ -11,9 +11,13 @@ async def start(update: Update, context: CallbackContext) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
-        "👋 Welcome to the Trading Bot!\n\nChoose an option below:",
+        "👋 Lets get try VPASS PRO V2 \n\nChoose an option below:",
         reply_markup=reply_markup
     )
+
+keyboard = [[InlineKeyboardButton("Go to My Shop", url="https://myshop.com")]]
+
+
 
 async def button_click(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
@@ -72,4 +76,6 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text("Welcome! Choose an option:", reply_markup=reply_markup)
 
 dispatcher.add_handler(CommandHandler("start", start))
+
+
 
