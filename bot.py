@@ -2,7 +2,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
 # Replace this with your actual Telegram bot token
-TOKEN = "7825732428:AAGiFm1AOG-Xj_0C19_8cTeY2pT-ZFsHXaY"
+TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
 
 # Start command handler
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -19,9 +19,9 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     if query.data == "signals":
-        await query.message.reply_text("📡 Trading signals will be sent here soon!")
+        await query.message.reply_text("📡 Trading signals here soon!")
     elif query.data == "deepseek":
-        await query.message.reply_text("🤖 Deepseek AI integration is coming soon!")
+        await query.message.reply_text("🤖 Deepseek AI is coming soon!")
 
 # Main function to start the bot
 def main():
