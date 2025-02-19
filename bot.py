@@ -1,35 +1,36 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, CallbackContext
 
-# Replace this with your actual Telegram bot token
 TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
 
-# Start command handler
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
-        [InlineKeyboardButton("Get Trading Signals 📈", callback_data="signals")],
-        [InlineKeyboardButton("Use Deepseek AI 🤖", callback_data="deepseek")]
+        [InlineKeyboardButton("🔍 Deepseek Search", callback_data="deepseek_search")],
+        [InlineKeyboardButton("📈 TradingView Signals", callback_data="tradingview_signals")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Welcome! Choose an option:", reply_markup=reply_markup)
 
-# Handle button clicks
-async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "👋 Welcome to the Trading Bot!\n\nChoose an option below:",
+        reply_markup=reply_markup
+    )
+
+async def button_click(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     await query.answer()
 
-    if query.data == "signals":
-        await query.message.reply_text("📡 Trading signals here soon!")
-    elif query.data == "deepseek":
-        await query.message.reply_text("🤖 Deepseek AI is coming soon!")
+    if query.data == "deepseek_search":
+        await query.message.reply_text("🔍 Deepseek Search feature coming soon!")
+    elif query.data == "tradingview_signals":
+        await query.message.reply_text("📈 TradingView Signals integration coming soon!")
 
-# Main function to start the bot
 def main():
     app = Application.builder().token(TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_click))
-    
-    print("Bot is running...")
+
+    print("🤖 Bot is running...")
     app.run_polling()
 
 if __name__ == "__main__":
