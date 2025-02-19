@@ -58,3 +58,12 @@ def ask_deepseek(user_message):
         return response.json()["choices"][0]["message"]["content"]
     else:
         return f"Error: {response.status_code}, {response.text}"  # Show error message
+
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello, World!"}
