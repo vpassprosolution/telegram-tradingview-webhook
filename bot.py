@@ -60,10 +60,16 @@ def ask_deepseek(user_message):
         return f"Error: {response.status_code}, {response.text}"  # Show error message
 
 
-from fastapi import FastAPI
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-app = FastAPI()
+def start(update: Update, context: CallbackContext):
+    keyboard = [
+        [InlineKeyboardButton("📊 Trading Signals", callback_data='signals')],
+        [InlineKeyboardButton("📖 Learn More", callback_data='learn')]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
+    update.message.reply_text("Welcome! Choose an option:", reply_markup=reply_markup)
+
+dispatcher.add_handler(CommandHandler("start", start))
+
