@@ -7,7 +7,8 @@ async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [InlineKeyboardButton("🔍 Deepseek Search", callback_data="deepseek_search")],
         [InlineKeyboardButton("📈 TradingView Signals", callback_data="tradingview_signals")],
-    ]
+        [InlineKeyboardButton("Go to My Shop", url="https://myshop.com")]]
+
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
@@ -15,7 +16,6 @@ async def start(update: Update, context: CallbackContext) -> None:
         reply_markup=reply_markup
     )
 
-keyboard = [[InlineKeyboardButton("Go to My Shop", url="https://myshop.com")]]
 
 
 
