@@ -5,10 +5,9 @@ TOKEN = "7825732428:AAGsljAfTisZpMEq-jZatqFG3zyxu_9jN3U"
 
 async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
-    [InlineKeyboardButton("Visit Website", url="https://yourwebsite.com"),
-     InlineKeyboardButton("Contact Us", url="https://yourwebsite.com/contact")],
-    [InlineKeyboardButton("Support", url="https://yourwebsite.com/support")]
-]
+        [InlineKeyboardButton("🌐 Visit Website", url="https://yourwebsite.com")],
+        [InlineKeyboardButton("📞 Contact Us", url="https://yourwebsite.com/contact")]
+    ]
 
 
     reply_markup = InlineKeyboardMarkup(keyboard)
